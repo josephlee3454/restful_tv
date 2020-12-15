@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <h1>
+        Add a New Show
+    </h1>
+    <div>
+        <form action="/add_show" method="POST">
+            {% csrf_token %}
+            
+                <label >Title</label>
+                <input id="title"  type="text" name="title" value="{{show.title}}"><br>
+                <label class="label">Network</label>
+                <input type="text" name="network" value="{{show.network}}">
+                <label class="label">Release date</label>
+                <input type="date" name="release" ><br>
+                <label>Description</label><br>
+                <textarea class="text" name="desc" type="text" placeholder="{{show.desc}}"></textarea><br>
+
+                
+            <button id="the_butt" type="submit" >Edit</button>
+
+        </form>
+
+    </div>
+    <a href="/show_info/{{show.id}}">Go to Show</a>
+
+</body>
+</html>
