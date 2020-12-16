@@ -9,6 +9,15 @@
 
 </head>
 <body>
+    <header>
+        {% if messages %}
+        <ul></ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </header>
 
     <div>
         <form action="/add_show" method="POST">
