@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib import messages
+from django.contrib import messages #if you want to use messages pass it in the veiws becuase we also need it for the html page 
 from .models import *
 
 # Create your views here.
@@ -18,10 +18,10 @@ def add_show(request):#this method creates a new model element
 
     if request.method == "POST":
         errors = NewShow.objects.validateShow(request.POST)
-        if errors:
+        if errors:#we can do just if truthy because errors are true becuase basically we want to run this no matter what error or how many so by saying if truthy that means if any error is added to db 
             for key, value in errors.items():# loops through the dictionary off errors
                 messages.error(request, value)# gives a message for every error in dict 
-            return redirect("/")# redirect back to home page becuase we want to finish 
+            return redirect("/")# redirect back to home page becuase we want to finish g 
         else:
             show = NewShow.objects.create(title = request.POST['title'], network = request.POST['network'], release = request.POST['release'], desc = request.POST['desc'])
             return redirect(f"show_info/{show.id}")#redirect to show info and passes the id throughht the f string 
@@ -49,7 +49,7 @@ def edit_show(request, show_id):## this functions sole purpose is to bring us to
     return render(request, 'edit.html', context)
 
 def show_update(request, show_id):# this function actually updates by sending a new post request that overwrites the old db info
-        if request.method == "POST":
+        if request.method == "POST": # because our update function is pretty much like our add show we just plug and play our error stuff here
             errors = NewShow.objects.validateShow(request.POST)
             if errors:
                 for key, value in errors.items():
